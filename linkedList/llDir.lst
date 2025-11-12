@@ -1,0 +1,640 @@
+     1                                 %line 1+1 llDir.asm
+     2                                 
+     3                                 
+     4                                 
+     5                                 
+     6                                 
+     7                                 
+     8                                 
+     9                                 NUM_VAR equ 6
+    10                                 ARG_SIZE equ 8
+    11                                 PATH_SEP equ 47
+    12                                 D_TYPE_OFFSET equ 18
+    13                                 D_NAME_OFFSET equ 19
+    14                                 STR_SIZE equ 64
+    15                                 BAD_PATH equ 1
+    16                                 BAD_OPEN equ 2
+    17                                 
+    18                                 %line 1+1 macro.inc
+    19                                 
+    20                                 
+    21                                 
+    22                                 
+    23                                 
+    24                                 
+    25                                 
+    26                                 LF equ 10
+    27                                 TAB equ 9
+    28                                 ESC equ 27
+    29                                 SPACE equ 32
+    30                                 EOL equ 0
+    31                                 VAR_SIZE equ 8
+    32                                 PATH_MAX equ 256
+    33                                 false equ 0
+    34                                 true equ 1
+    35                                 EXIT_SUCCESS equ 0
+    36                                 EXIT_FAILURE equ 1
+    37                                 
+    38                                 [default rel]
+    39                                 
+    40                                 [extern printf]
+    41                                 %line 22+0 macro.inc
+    42                                 [extern puts]
+    43                                 %line 23+1 macro.inc
+    44                                 [extern strcmp]
+    45                                 %line 23+0 macro.inc
+    46                                 [extern strcat]
+    47                                 [extern strlen]
+    48                                 %line 24+1 macro.inc
+    49                                 [extern strncmp]
+    50                                 [extern strncpy]
+    51                                 %line 25+0 macro.inc
+    52                                 [extern strcpy]
+    53                                 %line 26+1 macro.inc
+    54                                 [extern strcasecmp]
+    55                                 [extern malloc]
+    56                                 %line 27+0 macro.inc
+    57                                 [extern free]
+    58                                 %line 28+1 macro.inc
+    59                                 [extern memcpy]
+    60                                 %line 28+0 macro.inc
+    61                                 [extern memmove]
+    62                                 %line 29+1 macro.inc
+    63                                 [extern chdir]
+    64                                 %line 29+0 macro.inc
+    65                                 [extern strncat]
+    66                                 %line 30+1 macro.inc
+    67                                 [extern lstat]
+    68                                 %line 30+0 macro.inc
+    69                                 [extern getpwnam]
+    70                                 %line 31+1 macro.inc
+    71                                 
+    72                                 
+    73                                 %line 36+1 macro.inc
+    74                                 
+    75                                 %line 41+1 macro.inc
+    76                                 
+    77                                 %line 46+1 macro.inc
+    78                                 
+    79                                 %line 51+1 macro.inc
+    80                                 
+    81                                 %line 56+1 macro.inc
+    82                                 
+    83                                 %line 61+1 macro.inc
+    84                                 
+    85                                 %line 66+1 macro.inc
+    86                                 
+    87                                 %line 71+1 macro.inc
+    88                                 
+    89                                 %line 75+1 macro.inc
+    90                                 
+    91                                 %line 79+1 macro.inc
+    92                                 
+    93                                 %line 84+1 macro.inc
+    94                                 
+    95                                 %line 88+1 macro.inc
+    96                                 
+    97                                 %line 93+1 macro.inc
+    98                                 
+    99                                 %line 97+1 macro.inc
+   100                                 
+   101                                 %line 102+1 macro.inc
+   102                                 
+   103                                 %line 108+1 macro.inc
+   104                                 
+   105                                 %line 113+1 macro.inc
+   106                                 
+   107                                 %line 119+1 macro.inc
+   108                                 
+   109                                 %line 125+1 macro.inc
+   110                                 
+   111                                 %line 130+1 macro.inc
+   112                                 
+   113                                 %line 135+1 macro.inc
+   114                                 
+   115                                 %line 140+1 macro.inc
+   116                                 
+   117                                 %line 146+1 macro.inc
+   118                                 
+   119                                 %line 153+1 macro.inc
+   120                                 
+   121                                 %line 157+1 macro.inc
+   122                                 
+   123                                 %line 162+1 macro.inc
+   124                                 
+   125                                 %line 166+1 macro.inc
+   126                                 
+   127                                 %line 172+1 macro.inc
+   128                                 
+   129                                 %line 178+1 macro.inc
+   130                                 
+   131                                 %line 182+1 macro.inc
+   132                                 
+   133                                 %line 189+1 macro.inc
+   134                                 
+   135                                 %line 193+1 macro.inc
+   136                                 
+   137                                 %line 198+1 macro.inc
+   138                                 
+   139                                 %line 205+1 macro.inc
+   140                                 
+   141                                 %line 212+1 macro.inc
+   142                                 
+   143                                 %line 216+1 macro.inc
+   144                                 
+   145                                 %line 222+1 macro.inc
+   146                                 
+   147                                 %line 227+1 macro.inc
+   148                                 
+   149                                 %line 232+1 macro.inc
+   150                                 
+   151                                 %line 236+1 macro.inc
+   152                                 
+   153                                 %line 241+1 macro.inc
+   154                                 
+   155                                 %line 246+1 macro.inc
+   156                                 
+   157                                 %line 251+1 macro.inc
+   158                                 
+   159                                 %line 255+1 macro.inc
+   160                                 
+   161                                 %line 260+1 macro.inc
+   162                                 
+   163                                 %line 265+1 macro.inc
+   164                                 
+   165                                 %line 272+1 macro.inc
+   166                                 
+   167                                 %line 282+1 macro.inc
+   168                                 
+   169                                 %line 286+1 macro.inc
+   170                                 
+   171                                 %line 290+1 macro.inc
+   172                                 
+   173                                 %line 296+1 macro.inc
+   174                                 
+   175                                 %line 300+1 macro.inc
+   176                                 
+   177                                 
+   178                                 %line 18+1 llDir.asm
+   179                                 
+   180                                 %line 20+1 llDir.asm
+   181                                 
+   182                                 [global main]
+   183                                 [extern opendir]
+   184                                 %line 22+0 llDir.asm
+   185                                 [extern readdir]
+   186                                 [extern closedir]
+   187                                 %line 23+1 llDir.asm
+   188                                 [extern quicksortStr]
+   189                                 %line 23+0 llDir.asm
+   190                                 [extern bubblesortStr]
+   191                                 %line 24+1 llDir.asm
+   192                                 [extern insertNode]
+   193                                 %line 24+0 llDir.asm
+   194                                 [extern traverseList]
+   195                                 %line 25+1 llDir.asm
+   196                                 [extern createHeadNode]
+   197                                 %line 25+0 llDir.asm
+   198                                 [extern freeList]
+   199                                 %line 26+1 llDir.asm
+   200                                 [global listIndex]
+   201                                 %line 26+0 llDir.asm
+   202                                 [global pTemp]
+   203                                 [global pTempi]
+   204                                 [global pTempj]
+   205                                 %line 27+1 llDir.asm
+   206                                 [global nTempi]
+   207                                 %line 27+0 llDir.asm
+   208                                 [global nTempj]
+   209                                 [global fileType]
+   210                                 %line 28+1 llDir.asm
+   211                                 [global nNameType]
+   212                                 %line 28+0 llDir.asm
+   213                                 [global headNode]
+   214                                 [global nNext]
+   215                                 [global nPrev]
+   216                                 [global nType]
+   217                                 %line 29+1 llDir.asm
+   218                                 [global node_size]
+   219                                 %line 29+0 llDir.asm
+   220                                 [global nRecordCnt]
+   221                                 [global nAllocations]
+   222                                 %line 30+1 llDir.asm
+   223                                 [global dt_unknown]
+   224                                 %line 30+0 llDir.asm
+   225                                 [global dt_fifo]
+   226                                 [global dt_char]
+   227                                 [global dt_block]
+   228                                 %line 31+1 llDir.asm
+   229                                 [global dt_dir]
+   230                                 %line 31+0 llDir.asm
+   231                                 [global dt_reg]
+   232                                 [global dt_link]
+   233                                 [global dt_sock]
+   234                                 %line 32+1 llDir.asm
+   235                                 
+   236                                 DT_UNKNOWN equ 0
+   237                                 DT_FIFO equ 1
+   238                                 DT_CHR equ 2
+   239                                 DT_DIR equ 4
+   240                                 DT_BLK equ 6
+   241                                 DT_REG equ 8
+   242                                 DT_LINK equ 10
+   243                                 DT_SOCK equ 12
+   244                                 
+   245                                 
+   246                                 %line 48+1 llDir.asm
+   247                                 
+   248                                 [section .text]
+   249                                 
+   250                                 
+   251                                 main:
+   252 00000000 55                      push rbp
+   253                                 %line 53+0 llDir.asm
+   254 00000001 4889E5                  mov rbp, rsp
+   255 00000004 4883EC30                sub rsp, NUM_VAR * 8
+   256                                 %line 54+1 llDir.asm
+   257 00000008 48893C24                mov qword [rsp + VAR_SIZE * (NUM_VAR - 6)], rdi
+   258 0000000C 4889742408              mov qword [rsp + VAR_SIZE * (NUM_VAR - 5)], rsi
+   259 00000011 4831C0                  xor rax, rax
+   260 00000014 4889442420              mov qword [rsp + VAR_SIZE * (NUM_VAR - 2)], rax
+   261 00000019 4883FF01                cmp rdi, 1
+   262 0000001D 7410                    je .getCurrentDir
+   263                                 
+   264 0000001F 488D3D(F2FFFFFF)        lea rdi, [path]
+   265 00000026 488B7608                mov rsi, [rsi + ARG_SIZE]
+   266 0000002A E8(F6FFFFFF)            call strcpy
+   267 0000002F EB11                    jmp .terminatePath
+   268                                 
+   269                                 .getCurrentDir:
+   270 00000031 488D3D(F2FFFFFF)        lea rdi, [path]
+   271 00000038 488D35(F2FFFFFF)        lea rsi, [current_dir]
+   272 0000003F E8(F6FFFFFF)            call strcpy
+   273                                 
+   274                                 .terminatePath:
+   275 00000044 488D3D(F2FFFFFF)        lea rdi, [path]
+   276 0000004B E8(F6FFFFFF)            call strlen
+   277                                 
+   278 00000050 488D3D(F2FFFFFF)        lea rdi, [path]
+   279 00000057 48FFC8                  dec rax
+   280 0000005A 803C382F                cmp byte [rax + rdi], PATH_SEP
+   281 0000005E 740A                    je .chdir
+   282                                 
+   283 00000060 488D35(F2FFFFFF)        lea rsi, [path_sep]
+   284 00000067 E8(F6FFFFFF)            call strcat
+   285                                 
+   286                                 .chdir:
+   287 0000006C 488D3D(F2FFFFFF)        lea rdi, [path]
+   288                                 %line 84+0 llDir.asm
+   289 00000073 E8(F6FFFFFF)            call chdir
+   290 00000078 4885C0                  test rax, rax
+   291                                 %line 85+1 llDir.asm
+   292 0000007B 7426                    jz .opendir
+   293                                 
+   294 0000007D 488D35(F2FFFFFF)        lea rsi, [path]
+   295 00000084 488D3D(F2FFFFFF)        lea rdi, [errFmt]
+   296                                 %line 88+0 llDir.asm
+   297 0000008B 31C0                    xor eax, eax
+   298 0000008D E8(F6FFFFFF)            call printf
+   299                                 %line 89+1 llDir.asm
+   300 00000092 48C7C001000000          mov rax, BAD_PATH
+   301 00000099 488905(F2FFFFFF)        mov [exitCode], rax
+   302 000000A0 E9E6010000              jmp .fin
+   303                                 
+   304                                 .opendir:
+   305 000000A5 488D3D(F2FFFFFF)        lea rdi, [path]
+   306 000000AC E8(F6FFFFFF)            call opendir
+   307 000000B1 4889442410              mov qword [rsp + VAR_SIZE * (NUM_VAR - 4)], rax
+   308 000000B6 4885C0                  test rax, rax
+   309 000000B9 48C7C002000000          mov rax, BAD_OPEN
+   310 000000C0 488905(F2FFFFFF)        mov [exitCode], rax
+   311 000000C7 0F84BD010000            jz .fin
+   312                                 
+   313 000000CD E8(F6FFFFFF)            call createHeadNode
+   314                                 
+   315                                 .top_of_loop:
+   316 000000D2 488B7C2410              mov rdi, qword [rsp + VAR_SIZE * (NUM_VAR - 4)]
+   317 000000D7 E8(F6FFFFFF)            call readdir
+   318 000000DC 4889442418              mov qword [rsp + VAR_SIZE * (NUM_VAR - 3)], rax
+   319 000000E1 4885C0                  test rax, rax
+   320 000000E4 0F843D010000            jz .dirEnd
+   321                                 
+   322 000000EA 488B7C2418              mov rdi, qword [rsp + VAR_SIZE * (NUM_VAR - 3)]
+   323                                 %line 111+0 llDir.asm
+   324 000000EF 4883C712                add rdi, D_TYPE_OFFSET
+   325 000000F3 488D3F                  lea rdi, [rdi]
+   326                                 %line 112+1 llDir.asm
+   327 000000F6 488B07                  mov rax, [rdi]
+   328                                 
+   329 000000F9 3C08                    cmp al, DT_REG
+   330 000000FB 488D35(F2FFFFFF)        lea rsi, [dt_reg]
+   331 00000102 7447                    je .getFileType
+   332                                 
+   333 00000104 3C04                    cmp al, DT_DIR
+   334 00000106 488D35(F2FFFFFF)        lea rsi, [dt_dir]
+   335 0000010D 743C                    je .getFileType
+   336                                 
+   337 0000010F 3C0A                    cmp al, DT_LINK
+   338 00000111 488D35(F2FFFFFF)        lea rsi, [dt_link]
+   339 00000118 7431                    je .getFileType
+   340                                 
+   341 0000011A 3C01                    cmp al, DT_FIFO
+   342 0000011C 488D35(F2FFFFFF)        lea rsi, [dt_fifo]
+   343 00000123 7426                    je .getFileType
+   344                                 
+   345 00000125 3C02                    cmp al, DT_CHR
+   346 00000127 488D35(F2FFFFFF)        lea rsi, [dt_chr]
+   347 0000012E 741B                    je .getFileType
+   348                                 
+   349 00000130 3C06                    cmp al, DT_BLK
+   350 00000132 488D35(F2FFFFFF)        lea rsi, [dt_blk]
+   351 00000139 7410                    je .getFileType
+   352                                 
+   353 0000013B 3C0C                    cmp al, DT_SOCK
+   354 0000013D 488D35(F2FFFFFF)        lea rsi, [dt_sock]
+   355 00000144 7405                    je .getFileType
+   356                                 
+   357 00000146 488D35(F2FFFFFF)        lea rsi, [dt_unknown]
+   358                                 
+   359                                 .getFileType:
+   360 0000014D 488D3D(F2FFFFFF)        lea rdi, [fileType]
+   361 00000154 E8(F6FFFFFF)            call strcpy
+   362                                 
+   363 00000159 488B7C2418              mov rdi, qword [rsp + VAR_SIZE * (NUM_VAR - 3)]
+   364                                 %line 148+0 llDir.asm
+   365 0000015E 4883C713                add rdi, D_NAME_OFFSET
+   366 00000162 488D3F                  lea rdi, [rdi]
+   367                                 %line 149+1 llDir.asm
+   368 00000165 488D37                  lea rsi, [rdi]
+   369 00000168 488D3D(F2FFFFFF)        lea rdi, [fileName]
+   370 0000016F E8(F6FFFFFF)            call strcpy
+   371                                 
+   372 00000174 488D35(F2FFFFFF)        lea rsi, [parent_dir]
+   373 0000017B E8(F6FFFFFF)            call strcmp
+   374                                 %line 154+0 llDir.asm
+   375 00000180 85C0                    test eax, eax
+   376                                 %line 155+1 llDir.asm
+   377 00000182 0F8444FFFFFF            jz .top_of_loop
+   378                                 
+   379 00000188 488D35(F2FFFFFF)        lea rsi, [this_dir]
+   380 0000018F E8(F6FFFFFF)            call strcmp
+   381                                 %line 158+0 llDir.asm
+   382 00000194 85C0                    test eax, eax
+   383                                 %line 159+1 llDir.asm
+   384 00000196 0F8430FFFFFF            jz .top_of_loop
+   385                                 
+   386 0000019C 488D3D(F2FFFFFF)        lea rdi, [fileName]
+   387                                 %line 161+0 llDir.asm
+   388 000001A3 488D35(F2FFFFFF)        lea rsi, [stat]
+   389 000001AA E8(F6FFFFFF)            call lstat
+   390                                 %line 162+1 llDir.asm
+   391 000001AF 488D3D(F2FFFFFF)        lea rdi, [fileType]
+   392                                 %line 162+0 llDir.asm
+   393 000001B6 488D35(F2FFFFFF)        lea rsi, [dt_dir]
+   394 000001BD E8(F6FFFFFF)            call strcmp
+   395 000001C2 85C0                    test eax, eax
+   396                                 %line 163+1 llDir.asm
+   397 000001C4 7537                    jne .continue
+   398                                 
+   399                                 .parseFilename:
+   400 000001C6 488D3D(F2FFFFFF)        lea rdi, [space]
+   401                                 %line 166+0 llDir.asm
+   402 000001CD 488D35(F2FFFFFF)        lea rsi, [fileName]
+   403 000001D4 E8(F6FFFFFF)            call strcat
+   404                                 %line 167+1 llDir.asm
+   405 000001D9 488D3D(F2FFFFFF)        lea rdi, [fileName]
+   406                                 %line 167+0 llDir.asm
+   407 000001E0 488D35(F2FFFFFF)        lea rsi, [space]
+   408 000001E7 E8(F6FFFFFF)            call strcpy
+   409                                 %line 168+1 llDir.asm
+   410 000001EC 488D3D(F2FFFFFF)        lea rdi, [space]
+   411                                 %line 168+0 llDir.asm
+   412 000001F3 488D35(F2FFFFFF)        lea rsi, [empty_str]
+   413 000001FA E8(F6FFFFFF)            call strcpy
+   414                                 %line 169+1 llDir.asm
+   415                                 
+   416                                 .continue:
+   417 000001FF 488D3D(F2FFFFFF)        lea rdi, [fileName]
+   418                                 %line 171+0 llDir.asm
+   419 00000206 488D35(F2FFFFFF)        lea rsi, [fileType]
+   420 0000020D E8(F6FFFFFF)            call strcat
+   421                                 %line 172+1 llDir.asm
+   422 00000212 488D35(F2FFFFFF)        lea rsi, [fileName]
+   423 00000219 488B4C2420              mov rcx, qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   424 0000021E E8(F6FFFFFF)            call insertNode
+   425 00000223 48FF442420              inc qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   426 00000228 E9A0FEFFFF              jmp .top_of_loop
+   427                                 
+   428                                 .dirEnd:
+   429 0000022D 488B7C2410              mov rdi, qword [rsp + VAR_SIZE * (NUM_VAR - 4)]
+   430 00000232 E8(F6FFFFFF)            call closedir
+   431 00000237 488B742420              mov rsi, qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   432 0000023C 488D3D(F2FFFFFF)        lea rdi, [prtFmtTotal]
+   433                                 %line 182+0 llDir.asm
+   434 00000243 31C0                    xor eax, eax
+   435 00000245 E8(F6FFFFFF)            call printf
+   436                                 %line 183+1 llDir.asm
+   437 0000024A 488B442420              mov rax, qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   438 0000024F 4885C0                  test rax, rax
+   439 00000252 743A                    jz .fin
+   440                                 
+   441 00000254 488D3D(F2FFFFFF)        lea rdi, [unsorted]
+   442                                 %line 187+0 llDir.asm
+   443 0000025B E8(F6FFFFFF)            call puts
+   444                                 %line 188+1 llDir.asm
+   445 00000260 488B7C2420              mov rdi, qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   446 00000265 E8(F6FFFFFF)            call traverseList
+   447                                 
+   448                                 %line 200+1 llDir.asm
+   449                                 
+   450 0000026A 488D3D(F2FFFFFF)        lea rdi, [qsorted]
+   451                                 %line 201+0 llDir.asm
+   452 00000271 E8(F6FFFFFF)            call puts
+   453                                 %line 202+1 llDir.asm
+   454 00000276 4831FF                  xor rdi, rdi
+   455 00000279 488B742420              mov rsi, qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   456 0000027E 48FFCE                  dec rsi
+   457 00000281 E8(F6FFFFFF)            call quicksortStr
+   458                                 
+   459                                 %line 208+1 llDir.asm
+   460                                 
+   461 00000286 488B7C2420              mov rdi, qword [rsp + VAR_SIZE * (NUM_VAR - 2)]
+   462 0000028B E8(F6FFFFFF)            call traverseList
+   463                                 
+   464                                 .fin:
+   465 00000290 488B05(F2FFFFFF)        mov rax, [nAllocations]
+   466 00000297 488905(F2FFFFFF)        mov [nMaxAlloc], rax
+   467                                 
+   468 0000029E E8(F6FFFFFF)            call freeList
+   469                                 
+   470 000002A3 488D3D(F2FFFFFF)        lea rdi, [deptStat]
+   471                                 %line 218+0 llDir.asm
+   472 000002AA E8(F6FFFFFF)            call puts
+   473                                 %line 219+1 llDir.asm
+   474                                 
+   475                                 
+   476 000002AF 488D3D(F2FFFFFF)        lea rdi, [allocMsg]
+   477                                 %line 221+0 llDir.asm
+   478 000002B6 488B35(F2FFFFFF)        mov rsi, [nAllocations]
+   479 000002BD 488B15(F2FFFFFF)        mov rdx, [nMaxAlloc]
+   480 000002C4 31C0                    xor eax, eax
+   481 000002C6 E8(F6FFFFFF)            call printf
+   482                                 %line 222+1 llDir.asm
+   483                                 
+   484                                 
+   485 000002CB 488D3D(F2FFFFFF)        lea rdi, [nodeSizeFmt]
+   486                                 %line 224+0 llDir.asm
+   487 000002D2 488D35(52000000)        lea rsi, [node_size]
+   488 000002D9 31C0                    xor eax, eax
+   489 000002DB E8(F6FFFFFF)            call printf
+   490                                 %line 225+1 llDir.asm
+   491                                 
+   492 000002E0 4831C0                  xor rax, rax
+   493 000002E3 488905(F2FFFFFF)        mov [exitCode], rax
+   494                                 
+   495 000002EA 488D3D(F2FFFFFF)        lea rdi, [blankline]
+   496                                 %line 229+0 llDir.asm
+   497 000002F1 E8(F6FFFFFF)            call puts
+   498                                 %line 230+1 llDir.asm
+   499 000002F6 488B05(F2FFFFFF)        mov rax, [exitCode]
+   500                                 %line 230+0 llDir.asm
+   501 000002FD C9                      leave
+   502 000002FE C3                      ret
+   503                                 %line 231+1 llDir.asm
+   504                                 
+   505                                 
+   506                                 [section .rodata]
+   507 00000000 1B5B306D               RESET db ESC, "[0m"
+   508 00000004 1B5B303B33316D         RED db ESC, "[0;31m"
+   509 0000000B 095573657220494420-    prtUserFmt db TAB, "User ID  = %s", LF, EOL
+   510 0000000B 203D2025730A00     
+   511 0000001B 0947726F7570204944-    prtGroupFmt db TAB, "Group ID = %s", LF, EOL
+   512 0000001B 203D2025730A00     
+   513 0000002B 09257320282573290A-    prtFmt db TAB, "%s (%s)", LF, EOL
+   514 0000002B 00                 
+   515 00000035 25326420656E747269-    prtFmtTotal db "%2d entries found.", LF, EOL
+   516 00000035 657320666F756E642E-
+   517 00000035 0A00               
+   518 00000049 0925730A00             listFmt db TAB, "%s", LF, EOL
+   519 0000004E 096E6F64655F73697A-    nodeSizeFmt db TAB, "node_size = %2d", LF, EOL
+   520 0000004E 65203D202532640A00 
+   521 00000060 2E00                   this_dir db ".", EOL
+   522 00000062 2E2E00                 parent_dir db "..", EOL
+   523 00000065 2E2F00                 current_dir db "./", EOL
+   524 00000068 2000                   empty_str db " ", EOL
+   525 0000006A 0A4465706172746D65-    deptStat db LF, "Department of Statistics:", EOL
+   526 0000006A 6E74206F6620537461-
+   527 0000006A 746973746963733A00 
+   528 00000085 095468657265206172-    allocMsg db TAB, "There are %d out of %d memory allocations "
+   529 00000085 65202564206F757420-
+   530 00000085 6F66202564206D656D-
+   531 00000085 6F727920616C6C6F63-
+   532 00000085 6174696F6E7320     
+   533 000000B0 72656D61696E696E67-     db "remaining after call to freeList.", LF, EOL
+   534 000000B0 206166746572206361-
+   535 000000B0 6C6C20746F20667265-
+   536 000000B0 654C6973742E0A00   
+   537 000000D3 4552524F523A202573-    errFmt db "ERROR: %s is not a valid directory!", LF, EOL
+   538 000000D3 206973206E6F742061-
+   539 000000D3 2076616C6964206469-
+   540 000000D3 726563746F7279210A-
+   541 000000D3 00                 
+   542 000000F8 2F00                   path_sep db "/", EOL
+   543 000000FA 00                     blankline db EOL
+   544 000000FB 0A496E73657274696F-    unsorted db LF, "Insertion sorted List:", EOL
+   545 000000FB 6E20736F7274656420-
+   546 000000FB 4C6973743A00       
+   547 00000113 0A427562626C65736F-    bsorted db LF, "Bubblesorted List:", EOL
+   548 00000113 72746564204C697374-
+   549 00000113 3A00               
+   550 00000127 0A517569636B736F72-    qsorted db LF, "Quicksorted List:", EOL
+   551 00000127 746564204C6973743A-
+   552 00000127 00                 
+   553 0000013A 28756E6B6E6F776E29-    dt_unknown db "(unknown)", EOL
+   554 0000013A 00                 
+   555 00000144 286669666F2900         dt_fifo db "(fifo)", EOL
+   556 0000014B 28636861722900         dt_chr db "(char)", EOL
+   557 00000152 28626C6F636B2900       dt_blk db "(block)", EOL
+   558 0000015A 286469722900           dt_dir db "(dir)", EOL
+   559 00000160 287265672900           dt_reg db "(reg)", EOL
+   560 00000166 286C696E6B2900         dt_link db "(link)", EOL
+   561 0000016D 28736F636B65742900     dt_sock db "(socket)", EOL
+   562                                 
+   563                                 [section .bss]
+   564 00000000 <gap>                  path resb PATH_MAX
+   565 00000100 <gap>                  fileName resb STR_SIZE
+   566 00000140 <gap>                  fileType resb 16
+   567 00000150 0000000000000000<rept>       listIndex times 2 * PATH_MAX dq 0
+   568                                 
+   569 00001150 00<rept>               pTemp times STR_SIZE db 0
+   570 00001190 00<rept>               pTempi times STR_SIZE db 0
+   571 000011D0 00<rept>               pTempj times STR_SIZE db 0
+   572                                 
+   573 00001210 0000000000000000       nTempi dq 0
+   574 00001218 0000000000000000       nTempj dq 0
+   575                                 
+   576                                 [absolute 0]
+   577                                 %line 277+0 llDir.asm
+   578                                 node:
+   579                                 %line 278+1 llDir.asm
+   580                                 nNameType resb STR_SIZE
+   581                                 nType resb 16
+   582                                 nPrev resq 1
+   583                                 nNext resq 1
+   584                                 [align 8]
+   585                                 node_size EQU $ - node
+   586                                 %line 283+0 llDir.asm
+   587                                 [section .bss]
+   588                                 %line 284+1 llDir.asm
+   589                                 
+   590                                 [absolute 0]
+   591                                 %line 285+0 llDir.asm
+   592                                 stat:
+   593                                 %line 286+1 llDir.asm
+   594                                 st_dev resq 1
+   595                                 st_ino resq 1
+   596                                 st_mode resq 1
+   597                                 st_nlink resq 1
+   598                                 st_uid resq 1
+   599                                 st_gid resq 1
+   600                                 st_rdev resq 1
+   601                                 st_size resq 1
+   602                                 st_blksize resq 1
+   603                                 st_blocks resq 1
+   604                                 st_atime resq 1
+   605                                 st_atime_nsec resq 1
+   606                                 st_mtime resq 1
+   607                                 st_mtime_nsec resq 1
+   608                                 st_ctime resq 1
+   609                                 st_ctime_nsec resq 1
+   610                                 __unused4 resq 1
+   611                                 __unused5 resq 1
+   612                                 stat_size EQU $ - stat
+   613                                 %line 304+0 llDir.asm
+   614                                 [section .bss]
+   615                                 %line 305+1 llDir.asm
+   616                                 
+   617                                 [absolute 0]
+   618                                 %line 306+0 llDir.asm
+   619                                 passwd:
+   620                                 %line 307+1 llDir.asm
+   621                                 pw_name resq 1
+   622                                 pw_uid resw 1
+   623                                 pw_gid resw 1
+   624                                 pw_dir resq 1
+   625                                 pw_shell resq 1
+   626                                 passwd_size EQU $ - passwd
+   627                                 %line 312+0 llDir.asm
+   628                                 [section .bss]
+   629                                 %line 313+1 llDir.asm
+   630                                 
+   631 00001220 <gap>                  headNode resb node_size
+   632                                 
+   633                                 [section .data]
+   634 00000000 0000000000000000       nRecordCnt dq 0
+   635 00000008 0000000000000000       nAllocations dq 0
+   636 00000010 0000000000000000       nMaxAlloc dq 0
+   637 00000018 0000000000000000       exitCode dq EXIT_SUCCESS
+   638 00000020 20                     space db " "
+   639 00000021 0000<rept>             times STR_SIZE db 0, EOL
+   640                                 

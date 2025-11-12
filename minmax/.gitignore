@@ -1,0 +1,6 @@
+minmax
+a.out
+debug
+release
+*.lst
+*.obj

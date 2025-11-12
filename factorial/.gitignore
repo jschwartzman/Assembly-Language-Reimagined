@@ -1,0 +1,7 @@
+factorial
+a.out
+*.obj
+*.lst
+debug
+release
+.gdb_history

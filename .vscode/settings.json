@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "unistd.h": "c"
+    },
+    "C_Cpp.dimInactiveRegions": false,
+    "editor.detectIndentation": false
+}

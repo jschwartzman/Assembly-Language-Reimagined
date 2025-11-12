@@ -1,0 +1,6 @@
+hello
+*.obj
+debug
+release
+a.out
+.gdb_history
