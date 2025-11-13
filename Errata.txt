@@ -9,7 +9,7 @@ Remove notation 1. from the page.
 
 Page 21 Figure 2-1
 NOR Place bar above a + b
-NAND Place bar above an
+NAND Place bar above ab
 XOR Add space before b
 Negative Logic AND Place bar above ab
 Negative Logic OR Place bar above a and above b
